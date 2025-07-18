@@ -30,7 +30,14 @@
       color: #333;
       margin-bottom: 20px;
     }
-    .resume-text {
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+    }
+    .resume-text, .ai-feedback {
       background-color: #f0f0f0;
       padding: 15px;
       border-radius: 8px;
@@ -42,6 +49,12 @@
       line-height: 1.6;
       max-height: 400px;
       overflow-y: auto;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+    ul {
+      margin-bottom: 30px;
+      padding-left: 20px;
     }
   </style>
 </head>
@@ -52,25 +65,26 @@
     <div class="info"><span class="label">👤 Name:</span> {{ name }}</div>
     <div class="info"><span class="label">📧 Email:</span> {{ email }}</div>
     <div class="info"><span class="label">📞 Phone:</span> {{ phone }}</div>
-    
-    <div class="info"><span class="label">🎓 Education:</span></div>
+
+    <div class="section-title">🎓 Education:</div>
     <ul>
       {% for edu in education %}
         <li>{{ edu }}</li>
       {% endfor %}
     </ul>
 
-    <div class="info"><span class="label">🛠️ Skills:</span></div>
+    <div class="section-title">🛠️ Skills:</div>
     <ul>
       {% for skill in skills %}
         <li>{{ skill }}</li>
       {% endfor %}
     </ul>
 
-    <div class="info"><span class="label">📄 Full Resume Text:</span></div>
-    <div class="resume-text">
-      {{ text }}
-    </div>
+    <div class="section-title">📄 Full Resume Text:</div>
+    <div class="resume-text">{{ text }}</div>
+
+    <div class="section-title">🤖 AI Feedback:</div>
+    <div class="ai-feedback">{{ ai_feedback }}</div>
   </div>
 </body>
 </html>

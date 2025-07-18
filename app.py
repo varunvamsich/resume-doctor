@@ -1,71 +1,101 @@
 from flask import Flask, render_template, request
-import re
 import fitz  # PyMuPDF
+import openai
+import re
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
-def extract_text_from_pdf(path):
-    doc = fitz.open(path)
-    text = ""
-    for page in doc:
-        text += page.get_text()
-    return text
+# ✅ Load environment variables from .env
+load_dotenv()
 
-def extract_email(text):
-    match = re.search(r'[\w\.-]+@[\w\.-]+', text)
-    return match.group(0) if match else "Not found"
+# ✅ Set OpenAI API key securely
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def extract_phone(text):
-    match = re.search(r'(\+91[\-\s]?)?[789]\d{9}', text)
-    return match.group(0) if match else "Not found"
-
-def extract_name(text):
-    lines = text.split('\n')
+# ✅ Helper function to extract sections
+def extract_section(lines, start_keyword, stop_keywords):
+    extracted = []
+    started = False
     for line in lines:
-        if line.strip() and len(line.strip().split()) <= 4:
-            return line.strip()
-    return "Not found"
+        if start_keyword in line.lower():
+            started = True
+            continue
+        if started:
+            if any(stop in line.lower() for stop in stop_keywords):
+                break
+            if line.strip():
+                extracted.append(line.strip())
+    return extracted
 
-def extract_education(text):
-    edu_keywords = ["B.Tech", "Bachelor", "Master", "Degree", "Graduation", "Engineering"]
-    education = []
-    lines = text.split('\n')
-    for line in lines:
-        for keyword in edu_keywords:
-            if keyword.lower() in line.lower():
-                education.append(line.strip())
-    return education if education else ["Not found"]
-
-def extract_skills(text):
-    skills_keywords = ["Python", "Java", "HTML", "CSS", "JavaScript", "SQL", "C++", "React", "Node.js"]
-    found_skills = [skill for skill in skills_keywords if skill.lower() in text.lower()]
-    return found_skills if found_skills else ["Not found"]
-
+# ✅ Route: Homepage
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
 
+# ✅ Route: Handle Resume Upload
 @app.route('/upload', methods=['POST'])
 def upload():
-    resume = request.files['resume']
-    resume_path = "uploaded_resume.pdf"
-    resume.save(resume_path)
+    file = request.files['resume']
 
-    text = extract_text_from_pdf(resume_path)
-    email = extract_email(text)
-    phone = extract_phone(text)
-    name = extract_name(text)
-    education = extract_education(text)
-    skills = extract_skills(text)
+    # ✅ Extract text from PDF
+    text = ""
+    if file.filename.endswith('.pdf'):
+        doc = fitz.open(stream=file.read(), filetype="pdf")
+        for page in doc:
+            text += page.get_text()
 
+    lines = text.strip().split('\n')
+
+    # ✅ Extract Basic Info
+    email_match = re.search(r'[\w\.-]+@[\w\.-]+', text)
+    phone_match = re.search(r'\+?\d[\d\s\-]{8,}\d', text)
+
+    name = lines[0] if lines else "Not found"
+    email = email_match.group() if email_match else "Not found"
+    phone = phone_match.group() if phone_match else "Not found"
+
+    # ✅ Extract Education & Skills Sections
+    education = extract_section(lines, "education", ["skills", "projects", "experience", "certifications"])
+    skills = extract_section(lines, "skills", ["projects", "experience", "certifications", "summary"])
+
+    # ✅ Prepare Prompt for AI
+    prompt = f"""
+    Analyze the following resume and provide:
+    1. Strengths of the candidate
+    2. Areas of improvement
+    3. Suitable job roles
+    4. Skills to learn for better job prospects
+
+    Resume:
+    {text}
+    """
+
+    # ✅ Generate AI Feedback
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are a professional career counselor."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=700,
+            temperature=0.7
+        )
+        ai_feedback = response.choices[0].message['content'].strip()
+    except Exception as e:
+        ai_feedback = f"Error analyzing resume: {e}"
+
+    # ✅ Render Summary Page
     return render_template(
         'summary.html',
-        text=text,
+        name=name,
         email=email,
         phone=phone,
-        name=name,
         education=education,
-        skills=skills
+        skills=skills,
+        text=text,
+        ai_feedback=ai_feedback
     )
 
 if __name__ == '__main__':
