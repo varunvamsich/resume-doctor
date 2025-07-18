@@ -113,17 +113,6 @@ In this phase, we deployed Resume Doctor to the internet using **Render.com (Fre
 ![Summary Output](screenshots/summary_output.png)
 
 
-```bash
-git clone https://github.com/CH-Varun-Vamsi/resume-doctor.git
-cd resume-doctor
-pip install -r requirements.txt
-# Add your OpenAI key to .env
-echo "OPENAI_API_KEY=your_openai_api_key" > .env
-python app.py
-
-
----
-
 ## 🔍 Phase-5: Resume Ranker + Job Matcher System
 
 - Added a new feature with route `/job-matcher`
