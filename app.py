@@ -33,12 +33,10 @@ def extract_section(lines, start_keyword, stop_keywords):
 def index():
     return render_template('index.html')
 
-# ✅ Route: Handle Resume Upload
+# ✅ Route: Handle Resume Upload (Phase-3)
 @app.route('/upload', methods=['POST'])
 def upload():
     file = request.files['resume']
-
-    # ✅ Extract text from PDF
     text = ""
     if file.filename.endswith('.pdf'):
         doc = fitz.open(stream=file.read(), filetype="pdf")
@@ -47,7 +45,6 @@ def upload():
 
     lines = text.strip().split('\n')
 
-    # ✅ Extract Basic Info
     email_match = re.search(r'[\w\.-]+@[\w\.-]+', text)
     phone_match = re.search(r'\+?\d[\d\s\-]{8,}\d', text)
 
@@ -55,11 +52,9 @@ def upload():
     email = email_match.group() if email_match else "Not found"
     phone = phone_match.group() if phone_match else "Not found"
 
-    # ✅ Extract Education & Skills Sections
     education = extract_section(lines, "education", ["skills", "projects", "experience", "certifications"])
     skills = extract_section(lines, "skills", ["projects", "experience", "certifications", "summary"])
 
-    # ✅ Prepare Prompt for AI
     prompt = f"""
     Analyze the following resume and provide:
     1. Strengths of the candidate
@@ -71,7 +66,6 @@ def upload():
     {text}
     """
 
-    # ✅ Generate AI Feedback
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4",
@@ -86,7 +80,6 @@ def upload():
     except Exception as e:
         ai_feedback = f"Error analyzing resume: {e}"
 
-    # ✅ Render Summary Page
     return render_template(
         'summary.html',
         name=name,
@@ -98,5 +91,53 @@ def upload():
         ai_feedback=ai_feedback
     )
 
+# ✅ Route: Job Matcher Form Page (Phase-5 - UI)
+@app.route('/job-matcher')
+def job_matcher():
+    return render_template('job_matcher.html')
+
+# ✅ Route: Match Resume with Job Description (Phase-5 - Logic)
+@app.route('/match', methods=['POST'])
+def match():
+    file = request.files['resume']
+    job_desc = request.form['job_description']
+    text = ""
+
+    if file and file.filename.endswith('.pdf'):
+        doc = fitz.open(stream=file.read(), filetype="pdf")
+        for page in doc:
+            text += page.get_text()
+
+    prompt = f"""
+You are a resume reviewer. Compare the resume below with the job description and give:
+
+1. ✅ Match Score (0-100)
+2. 🔍 Missing Keywords from resume
+3. 💡 Suggestions to improve match
+
+Resume:
+{text}
+
+Job Description:
+{job_desc}
+"""
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are an expert resume-job matcher."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=700,
+            temperature=0.7
+        )
+        match_feedback = response.choices[0].message['content'].strip()
+    except Exception as e:
+        match_feedback = f"Error matching resume: {e}"
+
+    return render_template('match_summary.html', feedback=match_feedback)
+
+# ✅ Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)

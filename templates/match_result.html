@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Match Result</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      padding: 40px;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .feedback {
+      white-space: pre-wrap;
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #222;
+      line-height: 1.6;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .back-button a {
+      text-decoration: none;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .back-button a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🧠 Resume vs Job Description – Match Result</h2>
+    <div class="feedback">{{ feedback }}</div>
+    <div class="back-button">
+      <a href="/job-matcher">🔙 Back to Matcher</a>
+    </div>
+  </div>
+</body>
+</html>
