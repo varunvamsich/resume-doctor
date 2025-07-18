@@ -28,23 +28,22 @@ def extract_section(lines, start_keyword, stop_keywords):
                 extracted.append(line.strip())
     return extracted
 
-# ✅ Route: Homepage
+# ✅ Route: Combined Homepage (Phase-6)
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    return render_template('dashboard.html')  # new combined UI page
 
-# ✅ Route: Handle Resume Upload (Phase-3)
+# ✅ Route: Resume Analyzer (Phase-3)
 @app.route('/upload', methods=['POST'])
 def upload():
     file = request.files['resume']
     text = ""
-    if file.filename.endswith('.pdf'):
+    if file and file.filename.endswith('.pdf'):
         doc = fitz.open(stream=file.read(), filetype="pdf")
         for page in doc:
             text += page.get_text()
 
     lines = text.strip().split('\n')
-
     email_match = re.search(r'[\w\.-]+@[\w\.-]+', text)
     phone_match = re.search(r'\+?\d[\d\s\-]{8,}\d', text)
 
@@ -91,12 +90,7 @@ def upload():
         ai_feedback=ai_feedback
     )
 
-# ✅ Route: Job Matcher Form Page (Phase-5 - UI)
-@app.route('/job-matcher')
-def job_matcher():
-    return render_template('job_matcher.html')
-
-# ✅ Route: Match Resume with Job Description (Phase-5 - Logic)
+# ✅ Route: Job Matcher (Phase-5)
 @app.route('/match', methods=['POST'])
 def match():
     file = request.files['resume']
@@ -138,6 +132,6 @@ Job Description:
 
     return render_template('match_summary.html', feedback=match_feedback)
 
-# ✅ Run the Flask app
+# ✅ Run the app
 if __name__ == '__main__':
     app.run(debug=True)
