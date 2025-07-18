@@ -62,3 +62,23 @@ In this phase, we added real-time extraction of:
 🧠 Built using PyMuPDF, Regular Expressions, and Flask.
 
 💡 Outputs cleanly rendered on a summary page after resume upload.
+
+
+## 🔥 Phase-3: AI Feedback Integration using OpenAI
+
+In this phase, we added powerful AI features to our Resume Doctor project using **OpenAI GPT-4**. Now, after a resume is uploaded, the system performs:
+
+- ✅ Extraction of name, email, phone, education, and skills
+- ✅ Full resume text extraction using PyMuPDF
+- ✅ Real-time AI feedback with GPT-4:
+  - Strengths of the candidate
+  - Areas of improvement
+  - Suitable job roles
+  - Recommended skills to learn
+
+### 🔐 API Key Protection
+
+To keep the API key secure and production-ready:
+- The key is stored in a `.env` file (not in the code)
+- `python-dotenv` is used to load the `.env` file
+- `.env` is added to `.gitignore` so it's never pushed to GitHub
