@@ -120,3 +120,22 @@ pip install -r requirements.txt
 # Add your OpenAI key to .env
 echo "OPENAI_API_KEY=your_openai_api_key" > .env
 python app.py
+
+
+---
+
+## 🔍 Phase-5: Resume Ranker + Job Matcher System
+
+- Added a new feature with route `/job-matcher`
+- User can:
+  - 📄 Upload Resume (PDF)
+  - 📋 Paste Job Description
+- AI (GPT-4) compares resume with the job description and provides:
+  - ✅ Match Score (out of 100)
+  - 🔍 Missing Keywords
+  - 💡 Suggestions to Improve Resume
+  - 🧾 Summary of Suitability
+
+This helps users tailor their resumes for specific job roles more effectively! 💼✨
+
+> 🚀 Resume Doctor is now smarter with job relevance analysis!
