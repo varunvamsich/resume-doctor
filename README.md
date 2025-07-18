@@ -83,73 +83,26 @@ To keep the API key secure and production-ready:
 - `python-dotenv` is used to load the `.env` file
 - `.env` is added to `.gitignore` so it's never pushed to GitHub
 
-# 🧠 Resume Doctor – AI-Powered Resume Analyzer
-
-Resume Doctor is a web app that allows users to upload a resume (PDF) and receive smart AI feedback using OpenAI GPT-4.
-
 ---
 
-## ✅ Live Project
+## 🔥 Phase-4: Deployment & Hosting (Live on Render.com)
 
-🌐 [Live Demo – Resume Doctor](https://resume-doctor.onrender.com)
+In this phase, we deployed Resume Doctor to the internet using **Render.com (Free Instance)** and made the app accessible globally 🌐.
 
----
+### ✅ Key Implementations:
 
-## ⚙️ Features
+- Created `requirements.txt` with all dependencies
+- Installed and added `gunicorn` for production server
+- Added `Procfile` for Render startup command
+- Secured OpenAI key using `.env` file
+- Deployed to Render with:
+  - Build Command: `pip install -r requirements.txt`
+  - Start Command: `gunicorn app:app`
+- Set environment variable `OPENAI_API_KEY` on Render
+- Connected UptimeRobot to keep the app alive 24/7 🚀
 
-- Upload resume as PDF
-- Extracts: Name, Email, Phone, Education, Skills
-- AI Feedback includes:
-  - ✅ Strengths
-  - 🛠 Areas of Improvement
-  - 🎯 Suitable Job Roles
-  - 📚 Skills to Learn
-- GPT-4 powered analysis
-- .env file for secure API key handling
-- Hosted using Render.com
-- UptimeRobot keeps app always alive
-
----
-
-## 🚀 Technologies Used
-
-- **Frontend:** HTML, CSS (Jinja2 Templates)
-- **Backend:** Flask (Python)
-- **AI Engine:** OpenAI GPT-4
-- **PDF Parsing:** PyMuPDF (`fitz`)
-- **Deployment:** Render (Free Tier)
-- **Monitoring:** UptimeRobot
-
----
-
-## 🧾 Deployment Steps (Phase-4 Completed)
-
-1. Created `requirements.txt` using:  
-   `pip freeze > requirements.txt`
-
-2. Installed Gunicorn and added to requirements:  
-   `pip install gunicorn`
-
-3. Created `Procfile` with:  
-   `web: gunicorn app:app`
-
-4. Used `.env` file to securely store OpenAI API key  
-   and added `.env` to `.gitignore`
-
-5. Deployed on Render.com:
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `gunicorn app:app`
-
-6. Added Environment Variable on Render:  
-   `OPENAI_API_KEY=your_openai_api_key_here`
-
-7. Setup UptimeRobot to ping every 5 mins  
-   ✅ Keeps the app awake 24/7
-
----
-
-## 🧪 Run Locally
----
+### 🌐 Live Demo:
+[Resume Doctor – Try it Live](https://resume-doctor.onrender.com)
 
 ## 📸 Screenshots
 
