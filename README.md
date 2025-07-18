@@ -128,3 +128,16 @@ In this phase, we deployed Resume Doctor to the internet using **Render.com (Fre
 This helps users tailor their resumes for specific job roles more effectively! 💼✨
 
 > 🚀 Resume Doctor is now smarter with job relevance analysis!
+---
+
+## 🔥 Phase-6: Combined Dashboard UI – Resume Analyzer + Job Matcher
+
+In this phase, we merged both AI Resume Feedback and Job Matcher System into a single, clean dashboard (`dashboard.html`).
+
+### ✅ Features:
+- 📄 Resume Upload for GPT-4 Analysis
+- 📋 Job Description Match in same UI
+- 💡 Cleaner UI & simpler workflow
+- 🛠️ Updated routing (`/`, `/upload`, `/match`)
+### 🧠 Combined Dashboard
+![Dashboard Screenshot](screenshots/dashboard_combined.png)
