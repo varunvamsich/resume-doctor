@@ -44,3 +44,21 @@ This project allows users to upload their resumes securely and prepares the back
 
 ✅ Phase-2 makes our app smarter and user-friendly.  
 Get ready for Phase-2.5 where we extract **Name, Education, and Skills**!
+
+
+
+
+### ✅ Phase-2.5: Smart Resume Data Extraction
+
+In this phase, we added real-time extraction of:
+
+- 📛 Name
+- 📧 Email
+- 📞 Phone Number
+- 🎓 Education Details
+- 🛠️ Skills
+- 📃 Full Resume Text
+
+🧠 Built using PyMuPDF, Regular Expressions, and Flask.
+
+💡 Outputs cleanly rendered on a summary page after resume upload.
