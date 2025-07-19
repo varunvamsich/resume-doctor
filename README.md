@@ -175,6 +175,6 @@ In this phase, we merged both AI Resume Feedback and Job Matcher System into a s
 - Generates HTML resume and converts it into downloadable PDF
 
 📥 Output Screenshot:
-![Resume Screenshot](assets/phase-8-ats-resume.png)
+![Resume Screenshot](screenshots/phase-8-ats-resume.png)
 
 🔗 Live Link: https://resume-doctor.onrender.com
