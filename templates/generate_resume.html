@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Rebuilder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 40px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        form {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 600px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="file"], input[type="submit"] {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧠 AI Resume Rebuilder</h1>
+    <form action="/generate-resume" method="POST" enctype="multipart/form-data">
+        <label for="resume">Upload Your Resume (PDF):</label><br>
+        <input type="file" name="resume" accept=".pdf" required><br>
+        <input type="submit" value="Generate New Resume">
+    </form>
+</body>
+</html>

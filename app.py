@@ -131,6 +131,45 @@ Job Description:
         match_feedback = f"Error matching resume: {e}"
 
     return render_template('match_summary.html', feedback=match_feedback)
+# ✅ Route: Resume Rebuilder Form (Phase-7)
+@app.route('/generate-resume')
+def generate_resume_form():
+    return render_template('generate_resume.html')
+
+# ✅ Route: Handle Resume Rebuilding (Phase-7)
+@app.route('/generate-resume', methods=['POST'])
+def generate_resume():
+    file = request.files['resume']
+    resume_text = ""
+
+    if file and file.filename.endswith('.pdf'):
+        doc = fitz.open(stream=file.read(), filetype="pdf")
+        for page in doc:
+            resume_text += page.get_text()
+
+    prompt = f"""
+You're an expert resume writer. Rewrite the following resume in a professional, clean format suitable for modern ATS systems. Use strong action verbs, bullet points, clear section headers, and optimize it for readability.
+
+Resume Text:
+{resume_text}
+"""
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[
+                {"role": "system", "content": "You are a professional resume writer."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=1000,
+            temperature=0.7
+        )
+        generated_resume = response.choices[0].message['content'].strip()
+    except Exception as e:
+        generated_resume = f"Error generating resume: {e}"
+    # NEW fixed line
+    return render_template('generated_result.html', ai_resume=generated_resume)
+
 
 # ✅ Run the app
 if __name__ == '__main__':
