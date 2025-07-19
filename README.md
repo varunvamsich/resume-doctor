@@ -149,19 +149,19 @@ In this phase, we merged both AI Resume Feedback and Job Matcher System into a s
 🎯 Goal: Automatically generate a clean, modern, ATS-optimized resume using GPT-4.
 
 ### 🔧 Features:
-- Upload an existing resume (PDF)
-- GPT-4 rewrites it with:
-  - ✨ Strong action verbs
-  - 🧠 Clear ATS formatting
-  - 📄 Bullet points & headings
-- Output is shown on-screen for preview
+- 📄 Upload an existing resume (PDF)
+- 🤖 GPT-4 rewrites it with:
+  - ✨ Strong action verbs  
+  - 🧠 Clear ATS formatting  
+  - 📌 Bullet points & headings
+- 📺 Output is shown on-screen for preview
 
-### 💡 Future Enhancement:
-- 📝 Allow editing before download
-- 📥 Download as PDF/DOCX
+💡 Future Enhancements:
+- 📝 Allow editing before download  
+- 📥 Download as PDF/DOCX  
 
-🧪 Try it live:  
-👉 [https://resume-doctor.onrender.com](https://resume-doctor.onrender.com)
+### 🧪 Try it Live:
+👉 [Resume Doctor App](https://resume-doctor.onrender.com)
 
-📸 Screenshot:  
+### 📸 Screenshot:
 ![AI Resume Generator Screenshot](screenshots/ai_resume_result.png)
