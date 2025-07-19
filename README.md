@@ -165,3 +165,17 @@ In this phase, we merged both AI Resume Feedback and Job Matcher System into a s
 
 ### 📸 Screenshot:
 ![AI Resume Generator Screenshot](screenshots/ai_resume_result.png)
+
+
+### 🔄 PHASE-8: Resume Rebuilder with Download (🎯 Completed)
+🎯 Goal: Regenerate resume in 90+ ATS format & allow download.
+
+🔧 Features:
+- Rewrite resume with clean structure
+- Proper <h1>, <p>, <ul> formatting
+- Single-click resume PDF download
+
+📥 Try it Live: [Resume Doctor App](https://resume-doctor.onrender.com)
+
+📸 Screenshot:  
+![AI Generated Resume](assets/phase-8-ats-resume.png)

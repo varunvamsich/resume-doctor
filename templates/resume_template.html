@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Calibri, sans-serif; padding: 30px; font-size: 14px; color: #000; }
+        h1, h2 { margin-bottom: 10px; color: #2c3e50; }
+        .section { margin-bottom: 25px; }
+        .section h3 { font-size: 16px; margin-bottom: 5px; text-decoration: underline; }
+        ul { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 4px; }
+        .line { border-top: 1px solid #ccc; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <h1>🎯 AI Generated Resume (ATS Optimized)</h1>
+    <div class="line"></div>
+    <div class="section">
+        {{ resume_content | safe }}
+    </div>
+</body>
+</html>

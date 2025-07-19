@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Resume PDF</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 12pt;
+      line-height: 1.6;
+      padding: 40px;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+      margin-bottom: 6px;
+    }
+    p {
+      margin: 2px 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    hr {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  {{ resume_html | safe }}
+</body>
+</html>
