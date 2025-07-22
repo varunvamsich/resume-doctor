@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, send_file, make_response
-import fitz  # PyMuPDF
+# ---------- Import Dependencies ----------
+from flask import Flask, render_template, request, send_file
+import fitz  # PyMuPDF for PDF reading
 import openai
 import re
 import os
@@ -7,13 +8,14 @@ from dotenv import load_dotenv
 from xhtml2pdf import pisa
 from io import BytesIO
 
+# ---------- Flask App ----------
 app = Flask(__name__)
 
-# Load environment variables
+# ---------- Load Environment Variables ----------
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Helper function to extract sections
+# ---------- Helper: Extract Section ----------
 def extract_section(lines, start_keyword, stop_keywords):
     extracted = []
     started = False
@@ -28,21 +30,38 @@ def extract_section(lines, start_keyword, stop_keywords):
                 extracted.append(line.strip())
     return extracted
 
-# ---------- ATS Optimization Functions ----------
+# ---------- ATS Cleanup ----------
 def clean_html(html):
-    """Remove unwanted tags/attributes while preserving essential formatting"""
+    # Allowed ATS-safe tags
     allowed_tags = ['h1', 'h2', 'h3', 'p', 'ul', 'li', 'strong', 'a']
-    for tag in re.findall(r'<(/?\w+)', html):
-        if tag.strip('/') not in allowed_tags:
-            html = re.sub(fr'<{tag}[^>]*>', '', html)
-    # Remove empty paragraphs
-    html = re.sub(r'<p>\s*</p>', '', html)
-    # Normalize whitespace
-    html = re.sub(r'\s+', ' ', html).strip()
-    return html
 
+    # Remove script, style, comments
+    html = re.sub(r'<script.*?>.*?</script>', '', html, flags=re.DOTALL)
+    html = re.sub(r'<style.*?>.*?</style>', '', html, flags=re.DOTALL)
+    html = re.sub(r'<!--.*?-->', '', html, flags=re.DOTALL)
+
+    # Remove disallowed tags but preserve content inside
+    html = re.sub(r'</?(?!' + '|'.join(allowed_tags) + r')\b[^>]*>', '', html)
+
+    # Remove specific unwanted tags and HTML entities
+    html = re.sub(r'<br\s*/?>', '', html)
+    html = re.sub(r'<div[^>]*>', '', html)
+    html = re.sub(r'</div>', '', html)
+    html = re.sub(r'&nbsp;', ' ', html)
+
+    # Remove extra attributes inside allowed tags
+    html = re.sub(r'(<(?:' + '|'.join(allowed_tags) + r'))\b[^>]*>', r'\1>', html)
+
+    # Remove empty tags and excessive spaces
+    html = re.sub(r'<(p|h1|h2|h3|ul)>\s*</\1>', '', html)
+    html = re.sub(r'\s+', ' ', html)
+    html = re.sub(r'>\s+<', '><', html)  # Collapse spaces between tags
+
+    return html.strip()
+
+
+# ---------- ATS Validation ----------
 def validate_ats_structure(html):
-    """Check for required sections"""
     required_sections = [
         "Professional Summary",
         "Technical Skills",
@@ -55,24 +74,23 @@ def validate_ats_structure(html):
             missing.append(section)
     return missing
 
+# ---------- ATS Formatting Fix ----------
 def enforce_ats_formatting(html):
-    """Standardize resume formatting"""
-    # Fix dates
     html = re.sub(r"(\d{4})\s*-\s*(\d{4}|Present)", r"\1–\2", html)
-    # Capitalize bullet points
     html = re.sub(r"<li>\s*([a-z])", lambda m: f"<li>{m.group(1).upper()}", html)
     return html
 
-# ---------- Routes ----------
+# ---------- Home Route ----------
 @app.route('/')
 def home():
     return render_template('dashboard.html')
 
+# ---------- Resume Upload Route ----------
 @app.route('/upload', methods=['POST'])
 def upload():
-    """Resume Analyzer"""
     file = request.files['resume']
     text = ""
+
     if file and file.filename.endswith('.pdf'):
         doc = fitz.open(stream=file.read(), filetype="pdf")
         for page in doc:
@@ -124,9 +142,9 @@ def upload():
         ai_feedback=ai_feedback
     )
 
+# ---------- Job Matcher ----------
 @app.route('/match', methods=['POST'])
 def match():
-    """Job Matcher"""
     file = request.files['resume']
     job_desc = request.form['job_description']
     text = ""
@@ -166,21 +184,28 @@ def match():
 
     return render_template('match_summary.html', feedback=match_feedback)
 
-@app.route('/generate-resume')
-def generate_resume_form():
-    return render_template('generate_resume.html')
-
+# ---------- Form to Generate Resume ----------
 @app.route('/generate-resume', methods=['POST'])
 def generate_resume():
     """ATS-Optimized Resume Generator"""
     file = request.files['resume']
     resume_text = ""
+    hyperlinks = []
 
     if file and file.filename.endswith('.pdf'):
         doc = fitz.open(stream=file.read(), filetype="pdf")
         for page in doc:
             resume_text += page.get_text()
 
+            # ✅ Extract all real hyperlinks (e.g., LinkedIn, GitHub, Email, Projects, etc.)
+            links = page.get_links()
+            for link in links:
+                if 'uri' in link:
+                    url = link['uri']
+                    if url not in hyperlinks:
+                        hyperlinks.append(url)
+
+    # ✅ Create the prompt for GPT (use clean user resume + AI guidance)
     prompt = f"""
     Create an ATS-optimized resume (90+ score) using this template:
 
@@ -208,30 +233,56 @@ def generate_resume():
     <p>YYYY–YYYY | GPA/Percentage</p>
 
     Rules:
-    1. Use ONLY these HTML tags: h1, h2, h3, p, ul, li, strong
-    2. Never invent information
-    3. Quantify achievements
-    4. Standardize dates as "Month YYYY–Month YYYY"
+    1. Use ONLY these HTML tags: h1, h2, h3, p, ul, li, strong, a
+    2. Do NOT invent any hyperlinks or fake info
+    3. Only use verified links from the uploaded resume (LinkedIn, GitHub, Projects, etc.)
+    4. Use AI feedback and job matcher insights if available
+    5. Ensure resume formatting guarantees 90+ ATS score
+    6. Keep resume concise and remove extra spacing
 
     Resume Data:
     {resume_text}
     """
 
     try:
+        # 🔍 Generate optimized resume using GPT
         response = openai.ChatCompletion.create(
             model="gpt-4",
             messages=[
-                {"role": "system", "content": "You are an ATS resume expert. Use only verified information."},
+                {"role": "system", "content": "You are an ATS resume expert. Only use verified user data and hyperlinks."},
                 {"role": "user", "content": prompt}
             ],
             temperature=0.3,
             max_tokens=2000
         )
         generated_resume = response.choices[0].message['content']
+
+        # 🧹 Clean HTML and enforce formatting
         generated_resume = clean_html(generated_resume)
         generated_resume = enforce_ats_formatting(generated_resume)
-        
-        # Validate structure
+
+        # 🔗 Replace placeholder hyperlinks with real ones
+        for url in hyperlinks:
+            domain = url.split('//')[-1].split('/')[0].lower()
+            label = ""
+            if "linkedin" in domain:
+                label = "LinkedIn"
+            elif "github" in domain:
+                label = "GitHub"
+            elif "mailto" in url:
+                label = "Email"
+            elif "project" in domain or "vercel" in domain:
+                label = "Project"
+            elif "resume" in domain or "portfolio" in domain:
+                label = "Portfolio"
+            else:
+                label = domain
+
+            # ✅ Insert href link in the contact-info or wherever label found
+            link_tag = f'<a href="{url}" target="_blank">{label}</a>'
+            generated_resume = re.sub(rf'\b{label}\b', link_tag, generated_resume, flags=re.IGNORECASE)
+
+        # ✅ Check if any important sections are missing
         missing_sections = validate_ats_structure(generated_resume)
         if missing_sections:
             generated_resume += f"\n<!-- Missing sections: {', '.join(missing_sections)} -->"
@@ -241,15 +292,16 @@ def generate_resume():
 
     return render_template('generated_result.html', ai_resume=generated_resume)
 
+
+
+
+# ---------- PDF Download ----------
 @app.route('/download-resume', methods=['POST'])
 def download_resume():
-    """Generate PDF with perfect ATS formatting"""
     try:
         raw_html = request.form['resume_html']
-        
-        # Clean HTML before PDF conversion
-        cleaned_html = re.sub(r'<\!\-\-.*?\-\->', '', raw_html)  # Remove comments
-        cleaned_html = re.sub(r'\s+', ' ', cleaned_html).strip()  # Normalize whitespace
+        cleaned_html = re.sub(r'<\!\-\-.*?\-\->', '', raw_html)
+        cleaned_html = re.sub(r'\s+', ' ', cleaned_html).strip()
 
         full_html = f"""<!DOCTYPE html>
 <html>
@@ -258,7 +310,6 @@ def download_resume():
     <meta name="description" content="ATS-optimized resume">
     <title>Professional Resume</title>
     <style>
-        /* ATS-optimized styling */
         body {{
             font-family: Arial, sans-serif;
             font-size: 11pt;
@@ -323,7 +374,7 @@ def download_resume():
             full_html,
             dest=result,
             encoding='UTF-8',
-            link_callback=lambda uri, _: uri  # Handle external links
+            link_callback=lambda uri, _: uri
         )
 
         if pisa_status.err:
@@ -340,5 +391,6 @@ def download_resume():
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
 
+# ---------- Run App ----------
 if __name__ == '__main__':
     app.run(debug=True)

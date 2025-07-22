@@ -1,0 +1,12 @@
+1. Match %: 70%
+
+2. Missing Keywords: 
+- Web applications
+- cross-functional teams
+- manage entire development lifecycle
+
+3. Suggestions to improve: 
+- Mention experience with web applications
+- Highlight any experiences in managing the entire development lifecycle, from concept to deployment
+- Add any instances of collaboration with cross-functional teams
+- Include instances of designing, developing, and maintaining both front-end and back-end of applications in the project or experience sections.

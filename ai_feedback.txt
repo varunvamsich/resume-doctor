@@ -1,0 +1,21 @@
+1. Key Strengths:
+   - Strong educational background in Computer Science and Engineering
+   - Practical expertise in programming languages including Python, Java, C, and JavaScript
+   - Robust experience in full stack development
+   - Experience in utilizing developer tools like VS code, Linux, MS Excel, Github
+   - Demonstrated ability to lead teams
+   - Experience in project implementation
+   - Amateur projects and contributions show initiative and self-motivation
+   - Genuine interest and investment in technologically driven sustainable practices.
+   
+2. ATS Score: 70
+
+3. Fixes for 90+ ATS:
+   - Include a section for 'Work Experience', separate from 'Projects'. The placement may be mistakingly coded as a project rather than work experience.
+   - Make sure all sections have clear, standard headers. For example, 'Education', 'Skills', 'Work Experience', 'Projects', 'Certification'.
+   - Avoid complex formatting like boxes or multiple columns. Stick to simple bullet points.
+   - Make sure the fonts and font sizes are consistent throughout the resume.
+   - Include specific metrics and data in the experience section to prove success.
+
+4. Missing keywords:
+   - The job description is needed to provide accurate missing keywords. However, for a general Software Development or Full Stack Developer role, the resume could include terms like 'Agile methodology', 'Debugging', 'Database Management', 'Web Development', 'Software Testing', 'Software Development Life Cycle (SDLC)', etc. That being said, these keywords should only be included if they align with Varun's actual skills and experience.

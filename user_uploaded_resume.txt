@@ -1,0 +1,61 @@
+CH Varun Vamsi
+Nellore, Andhra Pradesh
+ +91 9492854809 # chinthalavarunvamsi25@gmail.com ï linkedin.com/varunvamsi-ch § github.com/varunvamsich
+Summary
+Passionate Computer Science Engineer with expertise in software development, full stack developer. Proven ability
+to lead projects and solve complex problems using Python, Java, and C.
+Education
+B.Tech in Computer Science and Engineering, VIT-AP University
+2021-2025
+7.46 CGPA
+Intermediate, Narayana junior college, Nellore, Andhra pradesh
+2019-2021
+93.1%
+10th ssc, Sri Netaji [MSR] Pilot High School,Nellore,Andhra Pradesh
+2018-2019
+9.8 CGPA
+Skills
+Programming Languages: Python, Java, C, JavaScript
+Developer Tools: VS code, Linux, MS Excel, Github
+Languages: English, Telugu
+Soft Skills: Team Work, Problem Solving, Time Management
+Projects
+MULTI PURPOSE OF AGRICULTURE ROBOT -ECS [ARDUINO]
+July 2023
+• Passionate about revolutionizing agriculture through the development of an advanced, multifunctional robot designed to
+seamlessly perform essential tasks such as seeding, watering, drilling, and plowing. This cutting-edge technology is
+poised to significantly boost farming productivity, reduce labor costs, and minimize environmental impact, driving
+sustainable and efficient practices in modern agriculture.
+Hotel Menu Page Using AWS
+August 2023
+• Developed a real-time, interactive menu that can be easily updated, enhancing the guest experience and for different
+hotel locations and promotions. Created a dynamic hotel menu webpage using advanced AWS technologies,
+demonstrating the practical application of skills honed through the CCBP 4.0 program to deliver innovative, user-centric
+solutions.
+Food delivery app
+July to August 2023
+• Developed an engaging and interactive front-end for a food delivery app using the MERN stack (MongoDB, Express.js,
+Node.js, React.js), resulting in a 30 increase in user engagement and a 20 improvement in order processing speed.
+Boosted system scalability and performance by 30 through optimized asynchronous data handling and seamless API
+integrations, ensuring a smoother and more efficient user experience.
+Experience
+CSI chapter | Core member
+July 2023 - May 2024
+• Contributed to promoting and organizing over 10 club events, driving a 40 increase in attendance and enhancing
+participant engagement through effective communication strategies and targeted outreach. Actively participated in the
+planning and executing 15+ club activities, resulting in a 30 increase in overall awareness and engagement through
+strategic planning and effective promotion.
+Bharat Intern | Machine Learning -Remote
+October 2023 - November 2023
+• Contributed to a project focused on artificial intelligence and machine learning applications, leading to the development
+of 2+ AI/ML models that improved decision-making processes. Gained hands-on experience in AI/ML technologies,
+enhancing problem-solving capabilities and delivering data-driven solutions that addressed complex challenges.
+Certifications
+Problem Solving Python | Hacker rank
+February 2023
+AWS Mega Work- Shop Participation | CCBP 4.O NXTWAVE
+December 2023
+Ethical Hacking Mega Workshop Participation | CCBP 4.O NXTWAVE
+October 2023
+Project management course offered by Google | Coursera
+November 2023

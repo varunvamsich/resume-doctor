@@ -1,0 +1,69 @@
+Personal Details
+KUSAM SRAVYA
+Software Developer | Hyderabad | kusamsravya@gmail.com | +917093181959
+linkedin.com/in/kusamsravya | github.com/sravya
+Summary
+Enthusiastic Software Developer with hands-on experience in full-stack development, REST API design, MongoDB/MySQL
+databases, and cloud deployment (AWS). Proficient in Java, Python, JavaScript, and modern frameworks like React.js and
+Node.js. Experienced in Agile, CI/CD, and version control (Git). Actively seeking roles in Software Developer, Full-Stack
+Developer & AI/ML Developer.
+Education
+Degree
+Institute
+CGPA/%
+Year
+B.Tech - CSE CORE
+Vellore Institute of Technology (VIT)
+9.46 CGPA
+2021 – 2025
+Intermediate
+Ascent Junior College, Vizag
+88.3%
+2019 – 2021
+10th Class - CBSE
+MP & EV English Medium School, Vizag
+79.0%
+2018 – 2019
+Experience
+MERN Full-Stack Developer, ETHNUS
+Aug 2023 – Nov 2023
+• Developed and deployed a MERN stack web application with user authentication, JWT security, and CRUD functionality.
+• Implemented CI/CD pipelines using GitHub Actions, reducing deployment time by 40%. Used Postman for API testing and ensured data
+integrity through MongoDB schema validation.
+• Participated in Agile sprints, collaborated with cross-functional teams, and conducted peer code reviews to maintain high code quality.
+Design Lead, Climate Change Club – VIT University
+July 2023 - May 2024
+• Created over 15+ design templates for events and social media using Canva and Figma.
+• Co-mentored 20 design team members, improving content delivery quality.
+Technical Skills
+Languages: Java, Python, C++, SQL
+Web & DataBases: HTML5, CSS3, JavaScript, React.js, Node.js, Express.js, MongoDB, SQLite
+AI & ML: TensorFlow, scikit-learn, PyTorch, SVM, CNN, NLP
+Tools & DevOps: Git, GitHub, VS Code, AWS EC2/S3, CI/CD, Windows
+Achievements
+Spam Detection on Twitter
+Springer Link
+Aug 2024
+Architecting Solutions on AWS
+Certificate Link
+Oct 2023
+MERN Internship – ETHNUS
+Certificate Link
+Nov 2023
+Software Engineering – JPMorgan Chase & Co
+Certificate Link
+Oct 2023
+Projects
+Dynamic Stock Forecaster
+website link
+• Tech: Python, scikit-learn, FMP API,Pandas. Improved prediction accuracy by 15% using moving averages.
+• Developed ML model for stock prediction using Multiple Linear Regression and time series analysis.
+Deepfake and Misinformation Detection
+website link
+• Tech: Python, TensorFlow, Scikit-learn. Implemented text classifier (SVM Logistic Regression) to flag AI-written misinformation.
+• Achieved 92% accuracy using CNN-based image classifier for detecting AI-generated content.
+SecurePass – Password Manager Desktop App
+website link
+• Tech: Java, Swing, AES Encryption, File I/O, SQLite. Enhanced and password storage reliability by 70% with Swing forms and file-based
+storage.
+• Developed a desktop password manager with secure AES-based encryption, improving data safety by 90%.

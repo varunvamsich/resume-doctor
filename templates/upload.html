@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Enhancer</title>
+</head>
+<body>
+    <h1>Upload Your Resume</h1>
+    <form action="/enhance" method="post" enctype="multipart/form-data">
+        <input type="file" name="resume" accept=".pdf,.html,.htm" required>
+        <textarea name="job_description" placeholder="Paste job description (optional)"></textarea>
+        <button type="submit">Optimize Resume</button>
+    </form>
+</body>
+</html>
