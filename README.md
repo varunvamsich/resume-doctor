@@ -178,3 +178,39 @@ In this phase, we merged both AI Resume Feedback and Job Matcher System into a s
 ![Resume Screenshot](screenshots/phase-8-ats-resume.png)
 
 🔗 Live Link: https://resume-doctor.onrender.com
+
+## ✅ Phase-9: Hyperlinked ATS Resume Rebuilder (🔥 GPT-4 Enhanced)
+
+In this phase, we made the **AI Resume Rebuilder smarter** by adding:
+
+### 🔗 Intelligent Hyperlink Detection & Preservation
+- Extracts hyperlinks (e.g., LinkedIn, GitHub, portfolio, publications) from the user's uploaded resume
+- Ensures they are preserved and rendered properly in the generated HTML resume
+- ✅ **No fake links** are added — only real ones used in the original resume
+
+### 🧠 GPT-4 Prompt Upgraded
+- GPT is instructed to **generate ATS-optimized resumes** using a strict tag whitelist (`h1, h2, h3, p, ul, li, strong, a`)
+- Achieves **90+ ATS score** by:
+  - Using strong action verbs
+  - Quantifying achievements
+  - Formatting sections properly
+  - Adding bullet points, summary, and tech stack
+
+### 🧼 Enhanced Clean-Up with `clean_html()`
+- Strips away unsupported tags (`<div>`, `<br>`, `&nbsp;`, etc.)
+- Ensures resume stays **ATS-compliant**
+- Removes empty tags and unnecessary whitespace
+
+### ✅ Final Output
+- ATS-optimized resume is displayed in-browser with proper formatting
+- All detected links are active, clickable, and traceable
+- GPT-generated resume is **true to the original** and enhanced for recruiters and ATS bots
+
+---
+
+📸 **Phase-9 Screenshot**  
+![Phase-9 ATS Resume ](screenshots/phase-9-ats-resume.png)
+
+🔗 **Live App**  
+[👉 Resume Doctor – Try It Live](https://resume-doctor.onrender.com)
+
