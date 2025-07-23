@@ -29,6 +29,10 @@
     <form action="/generate-resume" method="POST" enctype="multipart/form-data">
         <label for="resume">Upload Your Resume (PDF):</label><br>
         <input type="file" name="resume" accept=".pdf" required><br>
+
+        <!-- ✅ Hidden field to pass selected template name -->
+        <input type="hidden" name="selected_template_name" value="{{ selected }}">
+
         <input type="submit" value="Generate New Resume">
     </form>
 </body>

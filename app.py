@@ -290,7 +290,15 @@ def generate_resume():
     except Exception as e:
         generated_resume = f"<h1>Error</h1><p>{str(e)}</p>"
 
-    return render_template('generated_result.html', ai_resume=generated_resume)
+    selected_template = request.form.get("selected_template_name", "Default AI Template")
+
+    return render_template(
+        'generated_result.html',
+        ai_resume=generated_resume,
+        template_name=selected_template
+    )
+
+    
 
 
 
@@ -390,6 +398,63 @@ def download_resume():
 
     except Exception as e:
         return render_template('error.html', message=str(e)), 500
+# ---------- Template Selector ----------
+@app.route('/select-template', methods=['GET', 'POST'])
+def select_template():
+    templates = {
+        "harvard": "Harvard (Modern ATS-Optimized)",
+        "princeton": "Princeton (Chronological Resume)",
+        "google": "Google UX Resume (Minimal + Effective)",
+        "ibm": "IBM Technical Resume Template",
+        "stanford": "Stanford ATS Resume Template"
+    }
+    if request.method == 'POST':
+        selected = request.form.get('template')
+        return render_template(f'templates/{selected}.html')
+    return render_template('template_selector.html', templates=templates)
+
+# ---------- ATS Score Visualizer ----------
+@app.route('/ats-score-visualizer', methods=['POST'])
+def ats_score_visualizer():
+    resume_html = request.form['resume_html']
+    selected_template_name = request.form.get('template_name', 'Unknown Template')  # Safely get template
+
+    # Scoring logic based on section presence
+    sections = {
+        "Professional Summary": 25,
+        "Technical Skills": 20,
+        "Work Experience": 30,
+        "Education": 15,
+        "Hyperlinks (LinkedIn, GitHub)": 10
+    }
+
+    ats_score = 0
+    missing_sections = []
+
+    for section, weight in sections.items():
+        if section == "Hyperlinks (LinkedIn, GitHub)":
+            if "linkedin.com" in resume_html.lower() or "github.com" in resume_html.lower():
+                ats_score += weight
+            else:
+                missing_sections.append(section)
+        else:
+            if f"<h2>{section}</h2>" in resume_html:
+                ats_score += weight
+            else:
+                missing_sections.append(section)
+
+    ats_score = min(ats_score, 100)
+
+    return render_template(
+        "ats_score.html",
+        score=ats_score,
+        missing=missing_sections,
+        template_name=selected_template_name
+    )
+
+
+
+
 
 # ---------- Run App ----------
 if __name__ == '__main__':

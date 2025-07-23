@@ -1,0 +1,19 @@
+<!-- templates/ibm.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IBM Technical Resume</title>
+  <style>
+    body { font-family: "Courier New", monospace; background-color: #f9f9f9; padding: 40px; }
+    .resume { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #333; }
+    h1, h2 { color: #0b3d91; }
+    h3 { margin-top: 15px; }
+    ul { margin-left: 20px; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    {{ ai_resume|safe }}
+  </div>
+</body>
+</html>

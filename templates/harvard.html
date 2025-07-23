@@ -1,0 +1,19 @@
+<!-- templates/harvard.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Harvard Resume Template</title>
+  <style>
+    body { font-family: Georgia, serif; padding: 40px; background-color: #fdfdfd; }
+    .resume { max-width: 800px; margin: auto; background: white; padding: 40px; border: 1px solid #ddd; }
+    h1, h2 { color: #2c3e50; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+    h3 { color: #2c3e50; margin-top: 20px; }
+    ul { margin-left: 20px; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    {{ ai_resume|safe }}
+  </div>
+</body>
+</html>

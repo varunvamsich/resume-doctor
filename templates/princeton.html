@@ -1,0 +1,19 @@
+<!-- templates/princeton.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Princeton Resume Template</title>
+  <style>
+    body { font-family: "Times New Roman", serif; padding: 40px; background-color: #f4f4f4; }
+    .resume { background: #fff; max-width: 800px; margin: auto; padding: 50px; border-left: 5px solid #2e86de; }
+    h1, h2 { color: #2e86de; }
+    h3 { margin-top: 20px; }
+    ul { margin-left: 20px; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    {{ ai_resume|safe }}
+  </div>
+</body>
+</html>

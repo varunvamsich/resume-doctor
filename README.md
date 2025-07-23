@@ -214,3 +214,55 @@ In this phase, we made the **AI Resume Rebuilder smarter** by adding:
 🔗 **Live App**  
 [👉 Resume Doctor – Try It Live](https://resume-doctor.onrender.com)
 
+
+# 🧠 Resume Doctor
+
+> The Ultimate AI-Powered Resume Analyzer, Optimizer & Generator — Now with Template Selection and ATS Score Visualizer!
+
+Resume Doctor is a Flask-based web application that transforms your resume into an ATS-optimized version using OpenAI GPT-4. It analyzes resumes, provides AI feedback, generates new resumes using selected templates, and now even **visualizes your ATS score** section-wise.
+
+---
+
+## 🚀 New in Phase 10: 
+✅ Multiple Resume Templates  
+✅ ATS Score Visualizer with section-wise feedback
+
+---
+
+## 🔥 Core Features
+
+- 📤 Upload Resume (PDF)
+- 🧠 AI Resume Analysis (Skills, Suggestions)
+- 🎯 Job Matcher based on extracted skills
+- 🛠️ Resume Rebuilder using GPT-4 (90+ ATS score)
+- 📄 Export as PDF (Hyperlinks preserved)
+- 🎨 **Select from 5 Professional Templates**  
+  - Harvard Modern ATS  
+  - Princeton Chronological  
+  - Google UX Style  
+  - IBM Technical  
+  - Stanford ATS-Optimized
+- 📊 **ATS Score Visualizer**  
+  - Section-by-section breakdown (Summary, Skills, Experience, etc.)
+
+---
+
+## 🖼️ Screenshots
+
+| Resume Templates | ATS Score Visualizer |
+|------------------|----------------------|
+| ![Templates](screenshots/templates.png) | ![ATS](screenshots/ats-score.png) |
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Backend:** Python (Flask)
+- **AI:** OpenAI GPT-4
+- **PDF Handling:** PyMuPDF, xhtml2pdf
+- **Deployment Ready**
+
+---
+
+

@@ -19,7 +19,7 @@
     h2 {
       color: #00ffcc;
     }
-    input, textarea {
+    input, textarea, select {
       margin-top: 10px;
       padding: 10px;
       border-radius: 6px;
@@ -54,13 +54,21 @@
       <input type="submit" value="Analyze Match">
     </form>
   </div>
-  <!-- ✅ Section 3: AI Resume Rebuilder (Styled Like Others) -->
+
   <div class="section">
-  <h2>🧠 AI Resume Rebuilder</h2>
-  <form action="/generate-resume" method="post" enctype="multipart/form-data">
-    <input type="file" name="resume" accept=".pdf" required><br>
-    <input type="submit" value="Generate New Resume">
-  </form>
-</div>
+    <h2>🧠 AI Resume Rebuilder</h2>
+    <form action="/generate-resume" method="post" enctype="multipart/form-data">
+      <input type="file" name="resume" accept=".pdf" required><br>
+      <label>Select Resume Template:</label>
+      <select name="template" required>
+        <option value="Harvard">Harvard Template (Modern ATS-Optimized)</option>
+        <option value="Princeton">Princeton Chronological Resume</option>
+        <option value="Google">Google UX Resume Style (Minimal + Effective)</option>
+        <option value="IBM">IBM Technical Resume Template</option>
+        <option value="Stanford">Stanford ATS Resume Template</option>
+      </select><br>
+      <input type="submit" value="Generate New Resume">
+    </form>
+  </div>
 </body>
 </html>
